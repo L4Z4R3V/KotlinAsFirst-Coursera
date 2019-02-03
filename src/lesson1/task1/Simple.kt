@@ -1,4 +1,5 @@
 @file:Suppress("UNUSED_PARAMETER")
+
 package lesson1.task1
 
 import kotlin.math.*
@@ -48,8 +49,52 @@ fun quadraticRootProduct(a: Double, b: Double, c: Double): Double {
  * Пример главной функции
  */
 fun main(args: Array<String>) {
-    val x1x2 = quadraticRootProduct(1.0, 13.0, 42.0)
-    println("Root product: $x1x2")
+    //Trivial #1
+    val hours = 8
+    val minutes = 20
+    val seconds = 35
+    println("seconds have passed since $hours:$minutes:$seconds = ${lesson1.task1.seconds(hours, minutes, seconds)}")
+
+    //Trivial #2
+    val sagenes = 8
+    val arshins = 2
+    val vershoks = 11
+    println("\n$sagenes sagenes, $arshins arshins and $vershoks vershoks are equal %.2f".format(lengthInMeters(sagenes, arshins, vershoks)))
+
+
+    //Easy #1
+    println("\nLet's calculate third number of your digit from the end..")
+    var inputDigit = 0
+    while (inputDigit < 100) {
+        println("Enter the digit please. The digit must be equal or more than 100..")
+        inputDigit = readLine()!!.toInt()
+    }
+    println("Your number is ${thirdDigit(inputDigit)}")
+
+    //Easy #2
+    println("\nLet's get know how much minutes it take for train to travel..")
+    var hoursDepart = -1
+    var minutesDepart = -1
+    var hoursArrive = -1
+    var minutesArrive = -1
+    while (hoursDepart < 0 || hoursDepart > 23) {
+        print("Please enter hoursDepart : ")
+        hoursDepart = readLine()!!.toInt()
+    }
+    while (minutesDepart < 0 || minutesDepart > 59) {
+        print("Please enter minutesDepart : ")
+        minutesDepart = readLine()!!.toInt()
+    }
+    while (hoursArrive < 0 || hoursArrive > 23) {
+        print("Please enter hoursArrive : ")
+        hoursArrive = readLine()!!.toInt()
+    }
+    while (minutesArrive < 0 || minutesArrive > 59) {
+        print("Please enter minutesArrive : ")
+        minutesArrive = readLine()!!.toInt()
+    }
+    println("Time to travel in minutes from departure point to arrive point is equal ${travelMinutes(hoursDepart, minutesDepart, hoursArrive, minutesArrive)}")
+
 }
 
 /**
@@ -58,7 +103,7 @@ fun main(args: Array<String>) {
  * Пользователь задает время в часах, минутах и секундах, например, 8:20:35.
  * Рассчитать время в секундах, прошедшее с начала суток (30035 в данном случае).
  */
-fun seconds(hours: Int, minutes: Int, seconds: Int): Int = TODO()
+fun seconds(hours: Int, minutes: Int, seconds: Int): Int = (hours * 60 + minutes) * 60 + seconds
 
 /**
  * Тривиальная
@@ -67,7 +112,7 @@ fun seconds(hours: Int, minutes: Int, seconds: Int): Int = TODO()
  * Определить длину того же отрезка в метрах (в данном случае 18.98).
  * 1 сажень = 3 аршина = 48 вершков, 1 вершок = 4.445 см.
  */
-fun lengthInMeters(sagenes: Int, arshins: Int, vershoks: Int): Double = TODO()
+fun lengthInMeters(sagenes: Int, arshins: Int, vershoks: Int): Double = (sagenes * 48 + arshins * 48 / 3 + vershoks) * 4.445 / 100
 
 /**
  * Тривиальная
@@ -91,7 +136,11 @@ fun trackLength(x1: Double, y1: Double, x2: Double, y2: Double): Double = TODO()
  * Пользователь задает целое число, большее 100 (например, 3801).
  * Определить третью цифру справа в этом числе (в данном случае 8).
  */
-fun thirdDigit(number: Int): Int = TODO()
+fun thirdDigit(number: Int): Int {
+    val inputDigitAsString = number.toString()
+    val foundDigit: String = inputDigitAsString[inputDigitAsString.length - 3].toString()
+    return foundDigit.toInt()
+}
 
 /**
  * Простая
@@ -100,7 +149,8 @@ fun thirdDigit(number: Int): Int = TODO()
  * прибыл на станцию назначения в h2 часов m2 минут того же дня (например в 13:01).
  * Определите время поезда в пути в минутах (в данном случае 216).
  */
-fun travelMinutes(hoursDepart: Int, minutesDepart: Int, hoursArrive: Int, minutesArrive: Int): Int = TODO()
+fun travelMinutes(hoursDepart: Int, minutesDepart: Int, hoursArrive: Int, minutesArrive: Int):
+        Int = (hoursArrive - hoursDepart - 1) * 60 + 60 - minutesDepart + minutesArrive
 
 /**
  * Простая
